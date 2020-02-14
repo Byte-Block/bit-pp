@@ -121,17 +121,37 @@ for (var i = 0; i < a.length; i++) {
         console.log("F");
     }
 }
-for (var i = 0; i < array.length; i++) {
+
+for (var i = 0; i < a.length; i++) {
     sum += a[i];
 }
 
 var avg = sum / a.length;
 
-switch (avg) {
-    case value:
-
-        break;
-
-    default:
-        break;
+if (avg >= 90 && avg <= 100) {
+    console.log("A");
+}
+if (avg >= 80 && avg <= 89) {
+    console.log("B");
+}
+if (avg >= 70 && avg <= 79) {
+    console.log("C");
+}
+if (avg >= 60 && avg <= 69) {
+    console.log("D");
+}
+if (avg <= 59) {
+    console.log("F");
+}
+//8.
+for (var i = 1; i <= 100; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+        console.log("FizzBuzz");
+    } else if (i % 3 === 0) {
+        console.log("Fizz");
+    } else if (i % 5 === 0) {
+        console.log("Buzz");
+    } else {
+        console.log(i);
+    }
 }
