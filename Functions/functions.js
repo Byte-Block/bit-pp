@@ -167,5 +167,50 @@ function sumOfOddInArray(array) {
 }
 var a = [2, 4, 7, 8, 7, 7, 1];
 console.log(sumOfOddInArray(a));
-//10.Write a program that calculates the number of appearances of a letter a in a given string. Modify the program so it calculates the number of both letters a and A.
+//10.Write a program that calculates the number of appearances of a letter a in a given string.
+// Modify the program so it calculates the number of both letters a and A.
+function numberOfALetter(string) {
+    var aCount = 0;
+    for (var i = 0; i < string.length; i++) {
+        if (string[i] === 'a') {
+            aCount++;
+        }
+
+    }
+    return aCount;
+}
+var a = 'abcabcabcabc'
+
+console.log(numberOfALetter(a));
+
+function numberOfALetter(string) {
+    var lowerA = 0;
+    var upperA = 0;
+    for (var i = 0; i < string.length; i++) {
+        if (string[i] === 'a') {
+            lowerA++;
+        } else if (string[i] === 'A') {
+            upperA++;
+        }
+
+    }
+    return [lowerA, upperA];
+}
+var a = 'abcAbcabcAbc'
+
+console.log(numberOfALetter(a));
+//11.Write a program that concatenates a given string given number of times.
+// For example, if “abc” and 4 are given values, the program prints out abcabcabcabc. 
+function multipleConcatenation(string, number) {
+    var res = '';
+    for (var i = 0; i < number; i++) {
+        res += string;
+    }
+    return res;
+}
+
+var a = 'abc';
+var e = 4;
+
+console.log(multipleConcatenation(a, e));
 
