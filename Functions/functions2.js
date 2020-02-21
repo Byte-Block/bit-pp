@@ -205,14 +205,78 @@ console.log(getFirstNAdd(a, n));
 function arrayStringToNumbers(array) {
     var res = [];
     for (var i = 0; i < array.length; i++) {
-        if (array[i] !== undefined && array[i] !== NaN && array[i] !== Infinity) {
-            res[res.length] = parseInt(array[i]);
+        if (array[i] !== undefined && array[i] !== NaN && array[i] !== Infinity && !isNaN(parseFloat(a[i]))) {
+            res[res.length] = parseFloat(array[i]);
         }
     }
     return res;
 }
 
-var a = ["1", "21", undefined, "42", "1e+3", Infinity];
+var a = ["1", "21", undefined, "42", "1e+3", Infinity, 'string'];
 
 console.log(arrayStringToNumbers(a));
 
+//12.  Write a function to calculate how many years there are left until retirement based on the year of birth.
+// Retirement for men is at age of 65 and for women at age of 60.
+// If someone is already retired, a proper message should be displayed.
+
+function untilRetirement(number, gender) {
+    if (gender === 'm') {
+        if (number + 65 > 2020) {
+            return (number + 65) - 2020;
+        } else {
+            return 'Already retired'
+        }
+    } else if (gender === 'f') {
+        if (number + 60 > 2020) {
+            return (number + 60) - 2020;
+        } else {
+            return 'Already retired'
+        }
+    }
+    else {
+        return 'Please select m or f for gender';
+    }
+}
+var yearOfBirth = 1999;
+var gender = 'f';
+console.log(untilRetirement(yearOfBirth, gender));
+
+//13.Write a function to humanize a number (formats a number to a human-readable string) with the correct suffix such as 1st, 2nd, 3rd or 4th.
+//1 -> 1st
+//11 -> 11th
+
+function formatNumber(number) {
+    if (number === 1) {
+        return '1st';
+    } else if (number === 2) {
+        return '2nd';
+    } else if (number === 3) {
+        return '3rd';
+    } else if (number >= 4 && number < 21) {
+        return number + 'th';
+    } else if (number > 20) {
+        var string = toString(number);
+        if (string[string.length - 1] === 0) {
+            return number + 'th';
+        } else if (string[string.length - 1] === 1) {
+            return number + 'st';
+        } else if (string[string.length - 1] === 2) {
+            return number + 'nd';
+        } else if (string[string.length - 1] === 3) {
+            return number + 'rd';
+        } else if (string[string.length - 1] >= 4) {
+            return number + 'th';
+        }
+    }
+}
+
+var number = 89;
+console.log(formatNumber(number));
+
+function formatNumber2(number) {
+    var string = toString(number); 123
+    if (string[string.length - 2] + string[string.length - 1] === 11) {
+        return number + 'st';
+    }
+}
