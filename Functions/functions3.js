@@ -159,9 +159,90 @@ console.log(preFilledArray(e));
 //7. Write a function that says whether a number is perfect.
 //28 -> 28 is a perfect number.
 
-function isPerfect() {
-
+function isPerfect(number) {
+    var temp = 0;
+    for (var i = 1; i <= number; i++) {
+        if (number % i === 0) {
+            temp += i;
+        }
+    }
+    if ((temp / 2) === number && temp !== 0) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-var number = 28;
-console.log();
+var number = 496;
+console.log(isPerfect(number));
+
+//8.Write a function to find a word within a string.
+//'The quick brown fox', 'fox' -> "'fox' was found 1 times"
+//'aa bb cc dd aa', 'aa' -> "'aa' was found 2 times"
+
+function findWord(sentence, word) {
+    var tempWord = '';
+    var count = 0;
+    for (var i = 0; i < sentence.length; i++) {
+        if (sentence[i] === ' ') {
+            tempWord = '';
+        } else {
+            tempWord += sentence[i];
+            if (tempWord === word) {
+                count++;
+            }
+        }
+    }
+    return word + " was found " + count + " times";
+}
+
+var sentence = 'the quick brown fox';
+var word = 'fox';
+console.log(findWord(sentence, word));
+
+//9. Write a function to hide email address.
+//"myemailaddress@bgit.rs" -> "mye...@bgit.rs"
+
+function hideEmail(email) {
+    var hiddenEmail = '';
+    var emailIndicator = false;
+    for (var i = 0; i < email.length; i++) {
+        if (email[i] === '@') {
+            emailIndicator = true;
+            hiddenEmail += '...';
+        }
+
+        if (i < 3 || emailIndicator) {
+            hiddenEmail += email[i];
+        }
+    }
+    return hiddenEmail
+}
+
+var email = "myemailaddress@bgit.rs"
+console.log(hideEmail(email));
+
+//10. Write a program to find the most frequent item of an array.
+//[3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3]
+
+function mostFrequentIem(array) {
+    var item;
+    var maxCount = 0;
+
+    for (var i = 0; i < array.length; i++) {
+        var count = 0;
+        for (var j = 0; j < array.length; j++) {
+            if (array[j] === array[i]) {
+                count++;
+            }
+        }
+        if (count > maxCount) {
+            maxCount = count;
+            item = array[i];
+        }
+    }
+    return item;
+}
+
+var array = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];
+console.log(mostFrequentIem(array));
