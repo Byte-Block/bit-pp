@@ -256,27 +256,20 @@ function formatNumber(number) {
     } else if (number >= 4 && number < 21) {
         return number + 'th';
     } else if (number > 20) {
-        var string = toString(number);
-        if (string[string.length - 1] === 0) {
+        var string = number + '';
+        if (string[string.length - 1] === '0') {
             return number + 'th';
-        } else if (string[string.length - 1] === 1) {
+        } else if (string[string.length - 1] === '1') {
             return number + 'st';
-        } else if (string[string.length - 1] === 2) {
+        } else if (string[string.length - 1] === '2') {
             return number + 'nd';
-        } else if (string[string.length - 1] === 3) {
+        } else if (string[string.length - 1] === '3') {
             return number + 'rd';
-        } else if (string[string.length - 1] >= 4) {
+        } else if (string[string.length - 1] >= '4') {
             return number + 'th';
         }
     }
 }
 
-var number = 89;
+var number = 101;
 console.log(formatNumber(number));
-
-function formatNumber2(number) {
-    var string = toString(number); 123
-    if (string[string.length - 2] + string[string.length - 1] === 11) {
-        return number + 'st';
-    }
-}
