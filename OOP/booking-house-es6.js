@@ -3,110 +3,104 @@ console.log("This is ES6 on branch es6");
 console.log("Edited through VIM!");
 (function () {
 
-    function Country(name, odds, continent) {
-        this.name = name;
-        this.odds = odds;
-        this.continent = continent;
+    class Country {
+        constructor(name, odds, continent) {
+            this.name = name;
+            this.odds = odds;
+            this.continent = continent;
+        }
     }
 
-    function Person(name, surName, date) {
-        this.name = name;
-        this.surName = surName;
-        this.dateOfBirth = date;
+    class Person {
+        constructor(name, surName, date) {
+            this.name = name;
+            this.surName = surName;
+            this.dateOfBirth = date;
+        }
+        getData() {
+            return `${this.name} ${this.surname} ${this.dateOfBirth.getDay()}.${this.dateOfBirth.getMonth()}.${this.dateOfBirth.getYear()}`;
+        }
     }
 
-    Person.prototype.getData = function () {
-        return `${this.name} ${this.surname} ${this.dateOfBirth.getDay()}.${this.dateOfBirth.getMonth()}.${this.dateOfBirth.getYear()}`;
-    };
+    class Player {
+        constructor(person, betAmount, country) {
+            this.person = person;
+            this.betAmount = betAmount;
+            this.country = country;
+        }
 
-    function Player(person, betAmount, country) {
-        this.person = person;
-        this.betAmount = betAmount;
-        this.country = country;
+        getData() {
+            return `${this.country}, ${this.betAmount}eur, ${this.person.name} ${this.person.surName}, ${(2020 - this.person.dateOfBirth.getFullYear())} years`;
+        }
     }
 
-    Player.prototype.getData = function () {
-        return `${this.country}, ${this.betAmount}eur, ${this.person.name} ${this.person.surName}, ${(2020 - this.person.dateOfBirth.getFullYear())} years`;
+    class Address {
+        constructor(country, city, postalCode, street, streetNumber) {
+            this.country = country;
+            this.city = city;
+            this.postalCode = postalCode;
+            this.street = street;
+            this.streetNumber = streetNumber;
+        }
+        getData() {
+            return `${this.street} ${this.streetNumber}, ${this.postalCode} ${this.city}, ${this.country.name}`;
+        }
     }
 
-    function Address(country, city, postalCode, street, streetNumber) {
-        this.country = country;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.street = street;
-        this.streetNumber = streetNumber;
-    }
 
-    Address.prototype.getData = function () {
-        return `${this.street} ${this.streetNumber}, ${this.postalCode} ${this.city}, ${this.country}`;
-    };
+    class BettingPlace {
+        constructor(address) {
+            this.address = address;
+            this.listOfPlayers = [];
+        }
 
-    function BettingPlace(address) {
-        this.address = address;
-        this.listOfPlayers = [];
-    }
+        addPlayer(player) {
+            this.listOfPlayers.push(player);
+        }
 
-    BettingPlace.prototype.getData = function () {
-        let that = this;
-        function sumOfAllBets() {
+        sumOfAllBets() {
             let sum = 0;
-            that.listOfPlayers.forEach(element => {
-                sum += that.listOfPlayers.betAmount;
+            this.listOfPlayers.forEach(element => {
+                sum += this.listOfPlayers.betAmount;
             });
             return sum;
         }
 
-        return `${this.address.street}, ${this.address.postalCode} ${this.address.city}, sum of all bets ${sumOfAllBets()}`;
-    };
-
-    BettingPlace.prototype.addPlayer = function (player) {
-        this.listOfPlayers.push(player);
-    };
-
-    function BettingHouse(competition, numberOfPlayers) {
-        this.competition = competition;
-        this.listOfBettingPlaces = [];
-        this.numberOfPlayers = numberOfPlayers;
-    };
-
-    BettingHouse.prototype.numberOfBets = function () {
-        let counter = 0;
-        this.listOfBettingPlaces.forEach(element => {
-            this.listOfBettingPlaces.listOfPlayers.forEach(element => {
-                if (this.listOfBettingPlaces.listOfPlayers.betAmount > 0) {
-                    counter++;
-                }
-            });
-        });
-        return counter;
+        getData() {
+            return `${this.address.street}, ${this.address.postalCode} ${this.address.city}, sum of all bets ${this.sumOfAllBets()}`;
+        }
     }
 
-    BettingHouse.prototype.getData = function () {
-        var string = '';
-        let that = this;
-        that.listOfBettingPlaces.forEach(element => {
-            string += `\t${that.listOfBettingPlaces.getData()}\n`;
-            that.listOfBettingPlaces.listOfPlayers.forEach(element => {
-                string += `\t\t${that.listOfBettingPlaces.listOfPlayers.getData()}\n`;
-            });
-        });
-        // for (var i = 0; i < this.listOfBettingPlaces.length; i++) {
-        //     string += this.listOfBettingPlaces[i].getData() + '\n\t';
-        //     for (var j = 0; j < this.listOfBettingPlaces[i].listOfPlayers.length; j++) {
-        //         string += this.listOfBettingPlaces[i].listOfPlayers[j].getData() + '\n\t';
-        //     }
-        // }
-        return `${this.competition}, ${this.listOfBettingPlaces.length} betting places, ${this.numberOfBets()} bets\n\t${string}`;
-    }
+    class BettingHouse {
+        constructor(competition, numberOfPlayers) {
+            this.competition = competition;
+            this.listOfBettingPlaces = [];
+            this.numberOfPlayers = numberOfPlayers;
+        }
 
-    // var Continents = Object.freeze({
-    //     EUROPE: "EU",
-    //     ASIA: "AS",
-    //     AFRICA: "AF",
-    //     SOUTH_AMERICA: "SA",
-    //     NORTH_AMERICA: "NA",
-    //     AUSTRALIA: "AU"
-    // });
+        numberOfBets() {
+            let counter = 0;
+            this.listOfBettingPlaces.forEach(element => {
+                this.listOfBettingPlaces.listOfPlayers.forEach(element => {
+                    if (this.listOfBettingPlaces.listOfPlayers.betAmount > 0) {
+                        counter++;
+                    }
+                });
+            });
+            return counter;
+        }
+
+        getData() {
+            var string = '';
+            this.listOfBettingPlaces.forEach(element => {
+                string += `\t${this.listOfBettingPlaces.getData()}\n`;
+                this.listOfBettingPlaces.listOfPlayers.forEach(element => {
+                    string += `\t\t${this.listOfBettingPlaces.listOfPlayers.getData()}\n`;
+                });
+            });
+            return `${this.competition}, ${this.listOfBettingPlaces.length} betting places, ${this.numberOfBets()} bets\n\t${string}`;
+        }
+    }
 
     const europe = "EU";
     const asia = "AS";
@@ -114,6 +108,9 @@ console.log("Edited through VIM!");
     const southAmerica = "SA";
     const northAmerica = "NA";
     const australia = "AU";
+
+    let country1 = new Country("SR", "many", europe);
+    let country2 = new Country("GR", "none", europe);
 
     function createPlayer(person, betAmount, country) {
         return new Player(person, betAmount, country);
@@ -125,12 +122,12 @@ console.log("Edited through VIM!");
 
     var bettingHouse = new BettingHouse("WORLD SERIES BETTING");
 
-    var player1 = createPlayer(new Person("Pera", "Peric", new Date("Jan 01 1990")), 1050.00, 'SR');
-    var player2 = createPlayer(new Person("Pera", "Peric", new Date("Jan 01 1990")), 1050.00, 'SR');
-    var player3 = createPlayer(new Person("Pera", "Peric", new Date("Jan 01 1990")), 1050.00, 'GR');
-    var player4 = createPlayer(new Person("Pera", "Peric", new Date("Jan 01 1990")), 1050.00, 'SR');
+    var player1 = createPlayer(new Person("Pera", "Peric", new Date("Jan 01 1990")), 1050.00, country1);
+    var player2 = createPlayer(new Person("Pera", "Peric", new Date("Jan 01 1990")), 1050.00, country1);
+    var player3 = createPlayer(new Person("Pera", "Peric", new Date("Jan 01 1990")), 1050.00, country2);
+    var player4 = createPlayer(new Person("Pera", "Peric", new Date("Jan 01 1990")), 1050.00, country1);
 
-    var address1 = new Address('SR', "Belgrade", 11000, "Nemanjina", 4);
+    var address1 = new Address(country1, "Belgrade", 11000, "Nemanjina", 4);
 
     var bettingPlace1 = createBettingPlace(address1);
     var bettingPlace2 = createBettingPlace(address1);
