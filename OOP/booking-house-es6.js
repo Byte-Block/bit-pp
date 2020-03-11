@@ -1,4 +1,6 @@
 "use strict";
+console.log("This is ES6 on branch es6");
+console.log("Edited through VIM!");
 (function () {
 
     function Country(name, odds, continent) {
